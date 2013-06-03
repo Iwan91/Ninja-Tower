@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninja Tower Patcher", "NinjaTower_patcher\Ninja Tower Patcher.csproj", "{EC6B13E5-3618-4F48-BBDC-D8886945CAB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaTowerLauncher", "NinjaTower_launcher\NinjaTowerLauncher.csproj", "{6F7E3A9C-CC54-4F7B-882A-569D16F5CDD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC6B13E5-3618-4F48-BBDC-D8886945CAB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6B13E5-3618-4F48-BBDC-D8886945CAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6B13E5-3618-4F48-BBDC-D8886945CAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6B13E5-3618-4F48-BBDC-D8886945CAB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7E3A9C-CC54-4F7B-882A-569D16F5CDD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7E3A9C-CC54-4F7B-882A-569D16F5CDD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7E3A9C-CC54-4F7B-882A-569D16F5CDD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7E3A9C-CC54-4F7B-882A-569D16F5CDD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
