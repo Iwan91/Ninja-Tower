@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<VisualStudioUserFile
+	ProjectType="Visual C++"
+	Version="9,00"
+	ShowAllFiles="false"
+	>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			>
+			<DebugSettings
+				Command="$(TargetPath)"
+				WorkingDirectory=""
+				CommandArguments="toor toor 91.192.167.227 5000 5000 1 2"
+				Attach="false"
+				DebuggerType="3"
+				Remote="1"
+				RemoteMachine="KAMIL-KOMPUTER"
+				RemoteCommand=""
+				HttpUrl=""
+				PDBPath=""
+				SQLDebugging=""
+				Environment="PATH=d:\Gra\GRA2\NinjaTower\NinjaTower\allegro-5.0.7\bin;%PATH%"
+				EnvironmentMerge="true"
+				DebuggerFlavor="0"
+				MPIRunCommand=""
+				MPIRunArguments=""
+				MPIRunWorkingDirectory=""
+				ApplicationCommand=""
+				ApplicationArguments=""
+				ShimCommand=""
+				MPIAcceptMode=""
+				MPIAcceptFilter=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			>
+			<DebugSettings
+				Command="$(TargetPath)"
+				WorkingDirectory=""
+				CommandArguments="toor toor 91.192.167.227 5000 5000 0 0"
+				Attach="false"
+				DebuggerType="3"
+				Remote="1"
+				RemoteMachine="KAMIL-KOMPUTER"
+				RemoteCommand=""
+				HttpUrl=""
+				PDBPath=""
+				SQLDebugging=""
+				Environment="PATH=d:\Gra\GRA2\NinjaTower\NinjaTower\allegro-5.0.7\bin;%PATH%"
+				EnvironmentMerge="true"
+				DebuggerFlavor="0"
+				MPIRunCommand=""
+				MPIRunArguments=""
+				MPIRunWorkingDirectory=""
+				ApplicationCommand=""
+				ApplicationArguments=""
+				ShimCommand=""
+				MPIAcceptMode=""
+				MPIAcceptFilter=""
+			/>
+		</Configuration>
+	</Configurations>
+</VisualStudioUserFile>
