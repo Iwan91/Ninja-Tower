@@ -16,7 +16,7 @@ Due to multi-tier hierarchy of server - shards can be spawned on different machi
 
 **Cshardmgr** is unique. There's only one. It satisfies lobbyapp's requests to allocate a shard (sakura) by dispatching it to connected slaves, ie. **lshardmgrs**. These in turn fire up shards, allocate ports for them, take care if they throw up, and relay results back to the server (lobbyapp)
 
-**Lobbyapp** is the thing launcher connects to. You can find someone to play here, pick your character, and then entire server-allocation and game-managing process will be fired by lobbyapp. It is written in a nice transaction-fashioned way, has some unittests, and requires [Satella]https://github.com/henrietta/satella . It talks (networkily) with clients in an elegant SSL+JSON language.
+**Lobbyapp** is the thing launcher connects to. You can find someone to play here, pick your character, and then entire server-allocation and game-managing process will be fired by lobbyapp. It is written in a nice transaction-fashioned way, has some unittests, and requires [Satella](https://github.com/henrietta/satella). It talks (networkily) with clients in an elegant SSL+JSON language.
 
 # I've seen enough source. Give me the docs.
 
