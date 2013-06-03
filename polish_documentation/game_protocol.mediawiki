@@ -1,0 +1,168 @@
+'''NT1''' to protokół sieciowy Ninja Tower komunikacji klienta z [[Serwer A|Serwerem A]]. Działa zarówno po TCP jak i po UDP. Zadane adresy i porty otrzymamy od serwera zarządzającego.
+
+'''It's always the UTF-8'''
+
+Wszystko puszczamy w Little-Endian, za wyjątkiem rozmiaru pakietu (Size). Jak się zapytasz czemu tak to dostaniesz w mordę.
+
+Podstawową jednostką jest ramka NT1. Kursują one zarówno od klienta do serwera jak i od serwera do klienta. Wygląda ona tak:
+
+* word Size
+* byte[Size] Dane
+
+wtedy rozumiemy Dane jako pakiet NT1.
+
+Pakiety UDP nie zawierają nagłówka NT1 - ze względu na datagramowość UDP są one niepotrzebne.
+
+= Logowanie =
+== Uwierzytelnienie ==
+Aby zalogować się, łączymy się z serwerem, po czym wysyłamy pakiet zawierający login. Serwer odpowie pakietem zawierającym wyzwanie '''w'''. Odsyłamy serwerowi pakiet z zawartością taką jaką wygenerowałby Python po czymś takim:
+ 
+ hashlib.sha1(haslo_gracza + w).hexdigest()
+
+Następnie dostajemy od serwera pakiet z:
+ '\xFF'.join((nazwa_mapy, challenge2))
+
+Potem dostajemy od serwera pakiet z:
+ '\xFF'.join((pid_pierwszego_gracza, login_pierwszego_gracza, team_pierwszego_gracza, charname_postaci_pierwszego_gracza, ... , charname_ostatniego_gracza))
+
+
+
+== NAT Punchthrough ==
+Teraz musimy wysłać serwerowi pakiet UDP o treści równej 
+
+ hashlib.sha1(haslo_gracza + challenge2).hexdigest()
+
+Musimy odesłać ją serwerowi poprzez UDP żeby zostać puszczonym dalej. Taki pakiet możemy wysłać dopiero wtedy jak załadowaliśmy wsio i jesteśmy gotowi do wyświetlania mapy i innego szitu.
+
+Po tym dostajemy po TCP pakiet o treści 'READY'. Od tej pory jesteśmy w grze.
+
+= Gramy! TCP Edition =
+Opisujemy to w ten sposób że najpierw jest kto wysyła, potem pierwszy bajt statusu, potem reszta bajtów tego pakietu
+== Serwer wysyła ==
+Pierwszy bajt to opis komendy:
+* bajt:0 - Dostałeś sekcję Chat to Team
+* bajt:1 - Dostałeś sekcję Chat to All
+* bajt:2 - User się rozłączył
+* bajt:3 - User się połączył
+* bajt:4 - Pakiet Game State Delta
+* bajt:5 - Gra rozpoczęta!
+* bajt:6 - Koniec gry
+* bajt:7 - Bieżący score
+
+== User się połączył/rozłączył ==
+dalej jest
+word PID.
+
+== Bieżący score ==
+byte ScoreTeamu0
+byte ScoreTeamu1
+
+== Chat to Team, Chat to All==
+Odpowiedź jest postaci:
+pid_wysylajacego w postaci worda + tresc
+
+== Game State Delta ==
+Game State Delta składa się z kilku podpakietów które razem określają zmiany stanu gry. W momencie kiedy kończy się podpakiet zaczyna się nowy podpakiet i tak do końca aktualnej ramki NT. Typ podpakietu określa '''pierwszy jego bajt''', którego '''nie wliczamy''' w poniższe zestawienie. Game State Delta ma swój nagłówek: 
+
+ dword i - bieżąca iteracja
+
+Potem dopiero lecą podpakiety.
+
+=== Podpakiet 0: Gracz umarł ===
+* word PID_gracza
+=== Podpakiet 1: Gracz odżył ===
+* word PID_gracza
+=== Podpakiet 2: Utworzono strzał tracked ===
+* word SID_strzalu
+* word Typ_Strzalu
+* word X_startowy
+* word Y_startowy
+* float dx_startowy
+* float dy_startowy
+* byte id_animacji
+
+=== Podpakiet 3: Strzał (tracked lub non-tracked) zniszczony ===
+* word SID_strzalu
+=== Podpakiet 4: Utworzono strzał non-tracked ===
+* word SID_strzalu
+* word Typ_Strzalu
+* word X_startowy
+* word Y_startowy
+* float dx_startowy
+* float dy_startowy
+* byte id_animacji
+* byte x_typ_strzalu
+
+=== Podpakiet 5: Graczowi zmieniło się HP na skutek obrażeń lub heala ===
+* word PID_gracza
+* word aktualne_HP
+
+=== Podpakiet 6: Gracz użył skilla ===
+* word PID_gracza
+* word ID_skilla
+
+=== Podpakiet 7: Zmiana stanu buffa na graczu ===
+* word PID gracza
+* word BID buffa
+* byte Stacks ilość stacków (0 - buffa brak)
+* word ExpiresIn wygasa_po_czasie (w decysekundach, 0 znaczy że już wygasł)
+
+== Gra rozpoczęta ==
+reszty danych nie ma.
+
+== Koniec gry ==
+Reszta danych to jeden bajt z numerem teamu który wygrał
+
+== Klient wysyła ==
+Pierwszy bajt to opis komendy:
+* bajt:0 - Aktualizacja stanu klawiatury
+* bajt:1 - Wciśnięto klawisz skilla
+* bajt:2 - Chat to All
+* bajt:3 - Chat to Team
+* bajt:4 - Nic nie rób (ten pakiet to tylko bajt statusu)
+
+=== Aktualizacja stanu klawiatury ===
+* bajt: x - stan klawiszy
+** Pierwszy bit - klawisz UP jest wciśnięty
+** Drugi bit - klawisz LEFT jest wciśnięty
+** Trzeci bit - klawisz RIGHT jest wciśnięty
+** Czwarty bit - klawisz DOWN jest wciśnięty
+
+=== Wciśnięto klawisz skilla ===
+* bajt: x - który to klawisz
+** 0 - Q
+** 1 - E
+** 2 - Shift
+** 3 - LPM
+** 4 - PPM
+* word X - pozycja celowana przez kursor myszy
+* word Y - pozycja celowana przez kursor myszy
+* word P - pid gracza w którego celujemy
+** jeśli skill nie wymaga targetowania, wartość P jest nieistotna
+
+=== Chat to All, Chat to Team ===
+reszta to dane które są wiadomością
+
+= Gramy! UDP Edition =
+== Serwer wysyła ==
+Na początku zawsze jest
+* byte generacja
+* dword i - bieżąca iteracja(jesli odebrałeś już pakiet o wyższym i od tego to zignoruj go)
+
+=== Generacja 0 ===
+Reszta pakietu to ciąg elementów o takiej postaci:
+* byte k = (typ << 7 + id_biezacej_animacji)
+* word PID(jeśli typ=0), SID[Shot ID](jeśli typ=1)
+* word x
+* word y
+* float dx
+* float dy
+
+jeśli prawda że (k & 0xBF) to postać jest do góry nogami
+
+=== Generacja 1 ===
+Reszta danych jest pusta. To jest odpowiedź na \x00, czyli żądanie PING. Pole bieżącej iteracji ma jakąś bezsensowną wartość.
+
+== Klient wysyła ==
+Żeby coś wysłać musisz być zalogowany :)
+Jeden bajt \x00 w pakiecie to żądanie PING. Serwer odpowie pakietem Generacji 1.

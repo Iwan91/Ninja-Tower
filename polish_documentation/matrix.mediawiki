@@ -1,0 +1,117 @@
+'''Matrix''' to system fizyki Ninja Tower. 
+Serdecznie przepraszam za matematykę, ale do kurwy nędzy fizyka to stosowana matematyka!
+
+= Słowniczek =
+
+== Epsilon ==
+Epsilon to kwant (najmniejsza niepodzielna jednostka) czasu w systemie, domyślnie 100ms.
+
+== Kolizja ==
+Kolizja w iteracji ''i'' dwóch obiektów to sytuacja w której w ciągłym prawostronnie domkniętym przedziale czasowym między iteracjami ''i'' a ''i+1'' dwa obiekty miałyby przynajmniej jeden wspólny punkt.
+
+== Obiekt zorientowany ==
+Obiekt zorientowany to taki obiekt dla którego określona jest konkretna pozycja w świecie gry.
+
+== Obiekt ruchomy == 
+Obiekt ruchomy to taki dla którego nie jest prawdą że dx=const=0 lub dy=const=0.
+
+= Typy obiektów pierwotnych =
+* Prostokąt
+* Geometria (zbiór prostokątów)
+* Zorientowana geometria (geometria z zestawem współrzędnych x, y)
+* Ruchoma zorientowana geometria (zorientowana geometria z różniczkami pozycji dx, dy)
+
+= Typy obiektów świata =
+== Map boundary ==
+Unikatowy nieruchomy obiekt zorientowany. Jest to prostokątny wycinek płaszczyzny. Nie można wyjść poza niego. Wszystkie inne elementy zawierają się w nim. Wchodzi w kolizje ze wszystkimi obiektami ruchomymi.
+
+W dużym uproszczeniu są to cztery prostokąty o nieskończonych współrzędnych, ograniczające cztery boki wycinka płaszczyzny (mają tylko dużo bardziej zoptymalizowane procedury wykrywania kolizji).
+
+Cechy:
+* Wysokość
+* Szerokość
+
+== Platforma ==
+Nieruchomy obiekt zorientowany o jednostkowej wysokości, ustalonym początku i końcu w współrzędnych X. Wchodzi w interakcję tylko z aktorami dla których nie prawda że anchor i dy>=0.
+
+Platforma jako jedyny obiekt gry nie składa się z obiektów pierwotnych - ma własne, złożone, logiki kolizji.
+
+Cechy:
+* StartX
+* StopX
+* Y
+
+== Obstakl ==
+Nieruchomy obiekt zorientowany. Wchodzi w kolizje z aktorami i strzałami. Składa się z jednego prostokąta.
+
+Cechy:
+* Punkt początkowy
+* Punkt końcowy
+
+== Aktor ==
+Ruchomy obiekt niezorientowany (bez osobnego zestawu współrzędnych) będący geometrią. Wchodzi w kolizje z map boundary, obstaklami i czasami z platformą i strzałami.
+
+Cechy:
+* Geometria
+* X, Y
+* dX, dY
+* Kolor
+* anchor
+
+== Strzał ==
+Ruchomy obiekt niezorientowany (bez osobnego zestawu współrzędnych) będący geometrią. Wchodzi w kolizje z map boundary, obstaklami i czasem aktorami oraz strzałami.
+
+Strzały przenoszą oddziaływania między aktorami, gdyż aktorzy sami w siebie nie oddziałują na siebie.
+
+Cechy:
+* Geometria
+* Kolor
+* X, Y
+* dX, dY
+
+= Prawa i twierdzenia =
+
+== Stałe fizyczne świata ==
+* Stała grawitacji: 3 px/epsilon^2
+* Threshold grawitacji (maksymalna prędkość spadku swobodnego): 35 px/epsilon
+* Tarcie: 15 px/epsilon^2
+
+== Twierdzenie o kolizji w następnej iteracji ==
+Jeśli w interacji ''i'' nie występują kolizje, to obiekty te w iteracji ''i+1'' nie mają wspólnych punktów.
+
+== Wzór wysokości skoku ==
+Wysokość skoku wyraża się wzorem:
+ h=(s^2/g)*(s-(g/2))
+
+gdzie
+
+ h - wysokość skoku w pionie w pikselach
+ s - siła skoku w pikselach na epsilon
+ g - stała grawitacji w pikselach na epsilon kwadrat
+
+
+= Fajne stałe do gry =
+* Siła skoku: -36.3 px/epsilon^2 (pozwala komfortowo skoczyć 200 pikseli w górę)
+* Ruch w pionie strzałkami: 30 px/epsilon
+
+= Kolejność przetwarzania =
+
+1. Dodaj dy od grawitacji
+
+2. Wykonaj detekcję kolizji (detekcja kolizji zmienia dx, dy - ewentualnie x, y). Po tym etapie nie powinny występować już żadne kolizje!!!
+
+2.1. Kolizja aktorów z boundary
+
+2.2. Kolizja strzałów z boundary
+
+2.3. Kolizja aktorów z obstaklami
+
+2.4. Kolizja strzałów z obstaklami
+
+2.5. Kolizja aktorów z platformami
+
+2.6. Kolizja aktorów ze strzałami.
+
+3. Rusz postacie (x+=dx, y+=dy).
+
+4. Dodaj parametry wynikające z naciśniętych klawiszy (skok, ruch w pionie).

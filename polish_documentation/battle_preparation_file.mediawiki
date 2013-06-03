@@ -1,0 +1,19 @@
+'''OUTDATED'''
+
+
+Plik BPF zawiera wszystkie informacje niezbędne do rozegrania nowej rundy Ninja Tower. Karmi się nim [[Serwer A]].
+BPF jest podawany jako pierwszy parametr linii poleceń Serwerowi A.
+
+
+Jest to plik JSON o treści:
+
+
+* version => "alpha"::String
+* tcp_port => port TCP na którym ma słuchać serwer :: Integer
+* udp_port => port UDP na którym ma słuchać serwer :: Integer
+* map_name => nazwa mapy którą trzeba załadować :: String
+* players => lista obiektów:
+** login => login gracza :: String
+** password => hasło gracza :: String
+** character => nazwa wybranej postaci :: String
+** team => nr zespołu :: Integer(0, 1)

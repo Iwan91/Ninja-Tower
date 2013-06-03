@@ -1,0 +1,32 @@
+Kolizje będą opierać się na nałożeniu na każdą klatkę animacji prostokątnych hitboxów.<br>
+Oprócz hitboxów będzie można nałożyć jakieś dodatkowe pola prostokątów mówiące o jakiś specjalnych właściwościach.
+
+struct box
+{
+  int x1,y1; //pozycja początku prostokąta
+  int x2,y2; // pozycja końca prostokąta
+  int typ; //jakiego typu jest prostokąt hitbox itp.
+}
+
+//klasa posiada informacje dotyczące klatki danej animacji<br>
+Class Klatka
+{
+   std::vector<box> kolizje; //zestaw boxów bo jedna klatka może mieć dużo boxów
+   string path; //ścieżka mówi o pliku graficznym który jest do danej klatki animacji 
+}
+
+//klasa przechowuje zbiór klatek jak animacje dla jakiejś akcji<br>
+Class Animacja
+{
+   std::vector<Klatka> Animacja;// zbiór klatek
+   std::vector<string> Klawisze // mówi w jakiej kolejności trzeba nacisnąć lub co nacisnąć aby odpalić daną animacje
+}
+
+To jest potencjalnie bardzo zły pomysł z tymi klawiszami. Lepiej przypisz animacje do wydarzeń, np. ataku, ruchu po platformie, skoku. [[Użytkownik:Henrietta|Henrietta]] 14:41, 31 maj 2012 (CEST)
+
+
+//Klasa opisujaca bohatera<br>
+Class Hero
+{
+   std::vector <Animacja> Animacje; //zbiór animacji dla postaci
+}

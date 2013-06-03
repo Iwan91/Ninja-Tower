@@ -1,0 +1,44 @@
+Strona ta traktuje o interfejsach Shardmgr. Porozumiewają się one nieszyfrowanym transportem JSON na zasadzie big endian 4 bajty długość i obiekt JSON.
+
+= report statystyk =
+Po ukończonej zabawie lshardmgr wysyła do lobbyapp pakiet z informacjami o statystyce, na określony port.
+wysyła mu paczkę:
+
+   '''gugid''' => identyfikator danego meczu (string)
+   '''winner''' => 0, 1 lub null - nazwa teamu który wygrał grę
+   '''status''' => 1 jesli gra zakończyła się normalnie, 0 jesli był to abend sharda
+
+= shardzabawa =
+
+== lshardmgr gada z cshardmgrem ==
+Jak się lshardmgr podłącza do cshardmgr to wysyła JSON'a
+
+   '''request''' => '''first-login'''
+   '''id_name''' => zdefiniowana przez administratora nazwa serwera lshardmgr
+   '''shards''' => liczba dostępnych shardów (int)
+
+Potem co 30 sekund odsyła mu
+
+   '''shards''' => liczba dostępnych shardów (int)
+
+Jak cshardmgr chce alokacji serwera to wysyła (dokładnie taki sam pakiet wysyła cshardmgrowi klient żądający alokacji!)
+
+   '''request''' => '''allocate-shard'''
+   '''bpf_chunk''' => obiekt BPF tylko z polami ''map_name'' i ''players''
+   '''gugid''' => jakiś token identyfikujący mecz (string)
+
+I lshardmgr mu odsyła (dokładnie taki sam pakiet cshardmgr odsyła klientowi żądającemu alokacji)
+
+   '''response''' => '''allocated'''
+   '''gugid''' => jakiś token identyfikujący mecz (string)
+   '''tcp-interface''' => interfejs TCP (string)
+   '''udp-interface''' => interfejs UDP (string)
+   '''tcp-port''' => port TCP (integer)
+   '''udp-port''' => port UDP (integer)
+
+albo (dokładnie taki sam pakiet cshardmgr odsyła klientowi żądającemu alokacji)
+
+   '''response''' => '''recess'''
+   '''gugid''' => token identyfikujący alokację meczu (string)
+
+kiedy alokację szlag trafił

@@ -1,0 +1,40 @@
+== Buff ID ==
+0: Unallocated<br>
+1: Slow Ayatsuri
+
+== Shot ID ==
+Jeśli shot jest tylko death animation, to nie jest wymagane żeby miał jakąkolwiek geometrię.
+
+0: Unallocated<br>
+1: Kunai Temari<br>
+2: Shuriken Temari<br>
+3: Knockback Temari<br>
+
+4:Smoke Ayatsuri - death animation only<br>
+5:Spin Ayatsuri<br>
+6:Scroll Ayatsuri<br>
+7:Tree (Ayatsuri teleport) - death animation only<br>
+
+== Skill ID ==
+=== Universal Testing Skill ID ===
+0: KILL SELF<br>
+1: Unallocated<br>
+2: Unallocated<br>
+3: Unallocated<br>
+4: Unallocated<br>
+
+=== Temari Skills ===
+5: 3 kunaie  <lpm><br>
+6: shuriken ranged dps <ppm><br>
+7: teleport <shift><br>
+8: odpychanie <q><br>
+9: Unallocated, *e*<br>
+
+=== Ayatsuri Skills ===
+10: Meele atack ze zwojem <lpm><br>
+11: Postać wyrzuca przed siebie lalkę (Ayatsuri Spin) która leci i zadaje dmg wszystkim na swej drodze<ppm><br>
+12: Teleport (jutsu zamiany)<shift>
+Postać natychmiast zmienia swoje położenie w kierunku zadanym myszą. Zasięg 200px. <br>
+13: Dym+slow <q>
+Postać wystrzeliwuje pocisk, który podróżuje "nieskończenie szybko" i nieskończenie daleko. Uderzona postać wroga zostaje pokryta dymem i dostaje 70% slowa na 8 sekund. Gdy niewidzialny pocisk trafia, jest niszczony. <br>
+14: <e><br>

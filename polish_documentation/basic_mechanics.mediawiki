@@ -1,0 +1,9 @@
+Świat gry rozgrywa się w czasie dyskretnym 100ms. Co iterację obiekty przemieszczają się i wchodzą w interakcje. Każdy obiekt ruchomy ma zestaw 
+parametrów (x, y, dx, dy), które określają jak się porusza. Co iterację zachodzi:
+* x := x + dx
+* y := y + dy
+
+Gra najpierw zbiera wszystkie stany wejścia, buffy i debuffy, potem puszcza iterację symulacji fizyki. Symulacja fizyki mówi co z czym się zderzyło, a wtedy serwer wyciąga z tego konsekwencje. Na końcu klientom serwowane są aktualizacje stanu gry.
+
+Podlegają temu zarówno [[Strzał]]y jak i [[Aktor]]zy.
+Aktorzy dodatkowo mają parametr anchor, który określa czy obiekt może wchodzić w kolizje z mapą(oczywiście kolizje z krawędziami mapy śledzone są zawsze).

@@ -1,0 +1,143 @@
+Wszystkie pakiety są prefixowane 4-bajtowym little endian znacznikiem rozmiaru.
+Protokół to TCP. W sekcji danych (po nagłówku rozmiaru) rzucamy dane JSON. Najczęściej będą to mapy string=>wartość, czyli hashtabele.
+
+== Klient się łączy ==
+Wysyła pakiet z danymi (hashtabela):
+
+  '''login''' => '''login usera'''
+  '''password''' => '''hasło usera'''
+
+Serwer mu odpowiada - jeśli się zalogował dobrze
+
+  '''status''' => '''ok'''
+
+lub, jeśli źle
+
+  '''status''' => '''fail'''
+  '''code''' => '''tekstowy opis błędu po angielsku'''
+
+Jeśli klient łączył się gdy miał mecz w trakcie, dodatkowo po tym dostanie paczkę:
+
+  '''status''' => '''request_to_reconnect'''
+   '''target_ip''' => IP docelowego serwera (string)
+   '''target_port_tcp''' => port docelowego serwera (integer)
+   '''target_port_udp''' => port docelowego serwera (integer)
+
+== Klient pinguje ==
+Przynajmniej co 100 sekund klient ma coś rzucić do serwerka. Pusty pakiet ma długość 0, więc składa się tylko z czterech bajtów \x00\x00\x00\x00 (sam nagłówek długości, równy zero)
+
+
+== Kolejkujemy gracza ==
+Gracz wysyła JSON'a z danymi:
+
+  '''operation''' => '''enqueue'''
+  '''gametype''' => '''typ gry'''
+
+Gdzie gametype jest stringiem opisującym typ gry. Stringi te definiowane są w oddzielnej specyfikacji, aktualnie można dać **1vs1** **2vs2** lub **sandbox**
+
+Serwer odsyła JSON'a z:
+
+   '''status''' => '''ok''' lub '''fail'''
+   jeśli fail to '''code''' => '''tekstowy opis błędu'''
+
+== Wykolejkowujemy się==
+Gracz wysyła JSON'a z danymi:
+
+  '''operation''' => '''dequeue'''
+
+Klasycznie, potwierdza to status ok lub status fail
+
+== Znaleziono mecz ==
+Jeśli znaleziono mecz gracz dostaje ASYNCHRONICZNIE pakiet:
+
+   '''status''' => '''match_found'''
+   '''team1''' => lista loginów graczy z których składa się team1
+   '''team2''' => lista loginów graczy z których składa się team2
+   '''qname''' => nazwa kolejki z której się tu dostał
+   '''heroes''' => lista postaci z których może wybierać gracz
+
+Poprzez listę loginów rozumiemy JSON-ową strukturę listy, której elementami są stringi
+
+== Ktoś dodgeuje ==
+Jesli ktoś zdodgeował, gracz dostaje ASYNCHRONICZNIE pakiet:
+
+   '''status''' => '''dodge_victim'''
+   '''qname''' => nazwa kolejki
+
+Gracz wtedy automatycznie zakolejkowywany jest w qname
+
+== My dodgujemy ==
+Jesli to my chcemy dodgeować wysyłamy pakiet:
+
+   '''operation''' => '''dodge'''
+
+Odpowiedź standardowo status ok lub fail. Jeśli jest ok to jesteśmy usuwani z kolejki.
+
+== Wybieramy postać ==
+Aby wybrać postać wysyłamy pakiet:
+
+   '''operation''' => '''match_pick'''
+   '''hero''' => nazwa_bohatera
+
+Dostajemy status ok albo status fail
+
+== Ktoś wybrał postać ==
+Jeśli ktoś wybrał postać dostajemy tą paczkę. Dostaniemy ją też jeśli to my wybraliśmy bohatera (zwrotna):
+ASYNCHRONICZNA.
+
+   '''status''' => '''hero_picked'''
+   '''login''' => kto_wybral
+   '''hero''' => kogo_wybral
+
+== Ktoś się zalockinował ==
+Jeśli ktoś się zalockinował, dostajemy tą paczkę. Dostaniemy ją też jeśli to myśmy się zalockinowali. Jeśli serwer wymusza lockiny to wszyscy dostaną wiele takich paczek (tak jakby każdy w momencie timera wkliknął lockin). ASYNCHRONICZNA.
+
+   '''status''' => '''hero_locked_in'''
+   '''login''' => kto_wybral
+
+== My chcemy sie zalockinować ==
+Wysyłamy wtedy pakę
+
+   '''operation''' => '''hero_lock_in'''
+
+Dostajemy w odpowiedzi status/ok albo status/fail.
+
+
+== Zaczynamy mecza ==
+Tą paczkę dostaniemy dopiero po wszystkich lockinach. 
+
+   '''status''' => '''match_starting'''
+   '''condition''' => '''ok'''
+   '''target_ip''' => IP docelowego serwera (string)
+   '''target_port_tcp''' => port docelowego serwera (integer)
+   '''target_port_udp''' => port docelowego serwera (integer)
+
+Alternatywnie możemy też dostać:
+
+   '''status''' => '''match_starting'''
+   '''condition''' => '''fail'''
+   '''code''' => tekst opisujący błąd
+
+W tym przypadku gracz jest usuwany z kolejki.
+
+== Koniec rundy ==
+Tą paczkę dostajemy ASYNCHRONICZNIE jak kończy się runda.
+
+   '''status''' => '''round_ended'''
+   '''victor''' => 0, 1 lub null (w zależności kto wygrał)
+   '''mof''' => 0 jeśli błąd systemu, 1 jesli wszystko ok
+   '''last_round''' => 0 lub 1 jeśli koniec całego meczu (na razie tylko 1)
+
+
+== Pobieramy statystyki serwera ==
+W dowolnej chwili (jeśli tylko jesteśmy zalogowani) możemy wysłać pakę:
+
+   '''operation''' => '''server_statistics'''
+
+Dostaniemy w zamian:
+
+   '''status''' => '''server_statistics'''
+   '''players_in_queue''' => dictionary w którym klucze to nazwy kolejki a wartości to liczby graczy czekajacych w danej kolejce
+   '''players_online''' => wszystkich graczy online (integer)
+
+Można rzucać server_statistics zamiast pingami jbc.

@@ -1,0 +1,40 @@
+'''ContentFS''' to zbiór zasad zgodnie z którymi zapisywane są assety gry.
+
+Podstawą ContentFS jest tzw. katalog treści. Jest to katalog który zawiera elementy:
+
+== Mapa ==
+
+* [katalog] heroes - zawiera katalogi z nazwami postaci - zawartość takich katalogów opisana jest w [[Pliki animacyjne]].
+* [katalog] maps - zawiera katalogi które mają nazwy takie jak identyfikatory map. W takim katalogu jest:
+** [plik] info.ini - coś tam zawiera
+ [Main]
+ MapName=LudzioCzytelnaNazwaMapy
+ Height=800
+ Width=1200
+ Platforms=2
+ Obstacles=1
+ [Team0]
+ SpawnX=20
+ SpawnY=20
+ [Team1]
+ SpawnX=780
+ SpawnY=20
+ [Platform0]
+ Y=100
+ X=50
+ Width=50
+ [Platform1]
+ Y=100
+ X=150
+ Width=100
+ [Obstacle0]
+ X1=500
+ Y1=100
+ X2=600
+ Y2=300
+
+Platformy i Obstacle numerujemy od 0
+
+== Strzały ==
+
+[[Shots]]

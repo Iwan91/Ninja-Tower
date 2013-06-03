@@ -1,0 +1,72 @@
+Całą postać opisuje jeden folder.<br>
+W folderze np. Big Panda(ponieważ bohaterów identyfikujemy w systemie za pomocą stringa) znajduje się następująca struktura plików:
+
+ Big Panda
+   portrait.bmp
+   infoHero.ini
+   infoSkills.ini
+   anim0
+    info.ini
+    hitbox.ini
+    frame1.bmp
+    frame2.bmp
+    ...
+   animxx
+    ...
+
+Plik infoHero.ini w Heroxx(np. Big Panda) ma następującą strukturę:
+
+ [general]
+   name=Big Panda  //nazwa postaci
+   speed=30 //szybkosc pruszania sie w poziomie
+   jump=45 //wysokosc skoku (dodatnia)
+   mass=1.0  // Mnożnik efektów grawitacyjnych - na razie zostaw 1
+   hp=100  // startowe punkty życia
+   regen=0.1 // regeneracja hp do wartości startowej co 100ms
+   related_shots=0 1 2 3  // powiazane shoty, DEPRECATED
+
+Plik infoSkills.ini ma strukturę:
+ [vkey_shift]
+   related_shots=0 1 2 3 // powiazany shoty
+   name=dash //nazwa skilla np. invisibilty
+   cooldown=10 //czas po jakim skill sie odnowi w sekundach
+   id=0 // ID skilla
+   anim=0  //numer animacji z animations_skill
+   arg1=...
+   arg2=...
+   ... 
+   argn=...    // argumenty dla skryptu skilla - zastrzeżone
+ [vkey_q]
+   ...
+   
+Dopuszczalne wartości to [vkey_q] [vkey_e] [vkey_shift] [vkey_lpm] [vkey_rpm]
+
+Plik hitbox.ini ma następującą strukturę:
+ 
+ [main]
+ rectangles=4    # ile jest prostokątów bounding box
+ [hitBox0] # numerujemy od 0 każdy z prostokątów
+ x1=0
+ y1=0
+ x2=1
+ y2=2 
+ ...
+ [hitBox3]
+ ...
+ [synchroPoint] # punkt synchronizacji
+ x=1
+ y=1
+ 
+Wykrywanie animacji, klatek itp. odbywać się będzie przez skanowanie folderów. Numery animacji muszą zaczynać się od zera i powiększać się co jeden(tak aby można było lecieć po kolejnych liczbach i sprawdzać że jak jakieś nie ma to koniec animacji).
+
+Niektóre numery animacji są zastrzeżone. Jest to tak:
+* 0 - Postać stoi, zwrócona w prawo
+* 1 - Postać stoi, zwrócona w lewo
+* 2 - Postać biegnie, zwrócona w prawo
+* 3 - Postać biegnie, zwrócona w lewo
+* 4 - Postać jest w skoku, zwrócona w prawo
+* 5 - Postać jest w skoku, zwrócona w lewo
+* 6 - Postać umiera, prawo
+* 7 - Postać umiera, lewo
+
+Inwariant: Postać jest obrócona w prawo '''iff''' numer jest podzielny przez 2.

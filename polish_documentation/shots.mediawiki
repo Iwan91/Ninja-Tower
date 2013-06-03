@@ -1,0 +1,16 @@
+ shot
+  0
+     info.ini
+     anim0 //flying_left_side
+        hitbox.ini
+        frame0.bmp
+        framex.bmp
+     anim1 //flying_right_side
+     anim2 //dead_animation_skill
+  1
+
+
+Mamy zestaw x-typów shota. X-typ określa jest zachowanie gdy shot jest untracked. 
+X-typ 0: mamy dwie animacje - lewo(0) i prawo(1).<br>
+X-typ 1: mamy cztery animacje - west(0), easy(1), north(2) i south(3)<br>
+X-typ 2: mamy osiem animacji  west(0), easy(1), north(2) i south(3), northwest(4), northeast(5), southwest(6), southeast(7)
