@@ -1,0 +1,20 @@
+{  "map_name":"Town",
+   "tcp_interface": "127.0.0.1",
+   "udp_interface": "127.0.0.1",
+   "tcp_port": 7000,
+   "udp_port": 7001,
+   "players": [
+            {"login": "root",
+             "password": "root",
+             "character": "Temari",
+             "team": 0}, 
+            {"login": "toor",
+            "password": "toor",
+            "character": "Temari",
+            "team": 0},
+            {"login": "enemy1",
+            "password": "enemy1",
+            "character": "Temari",
+            "team": 0}
+        ],
+    "version": "alpha"}

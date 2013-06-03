@@ -1,0 +1,14 @@
+{
+
+    "statistics_host": "127.0.0.1",
+    "statistics_port": 4002,
+
+    "master_host": "127.0.0.1",
+    "master_port": 4000,
+    "outside_visible_shard_interface": "91.192.xxx.xxx",
+    "starting_shards": 10,
+    "shard_ports": [5100, 10],
+    "oper_directory": "/home/ninjatower/lshardmgr_tmp/",
+    "id_name": "arc_en_ciel",
+    "sakura_popen": ["/bin/pypy", "/home/ninjatower/sakura/run.py", "%BPF%", "/var/www/html/ninjatower/patcher/data/data/data/", "%OUT%"]
+}

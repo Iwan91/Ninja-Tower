@@ -1,0 +1,1 @@
+from lobbyapp.statisticsnotary.base import StatisticsNotary

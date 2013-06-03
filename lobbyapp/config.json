@@ -1,0 +1,36 @@
+{
+    "inbound_listening_interface": "91.192.xxx.xxx",
+    "inbound_listening_port": 4001,
+    "inbound_certfile": "/home/.../key.certificate",
+    "inbound_keyfile": "/home/.../key.private",
+
+    "stat_not_interface": "127.0.0.1",
+    "stat_not_port": 4002,
+
+    "cshard_outbound_interface": "127.0.0.1",
+    "cshard_outbound_port": 4000,
+
+
+    "sqldb_username": "ninjatower",
+    "sqldb_password": "GO FAR MY FRIEND",
+    "sqldb_host": "localhost",
+    "sqldb_dbname": "ninjatower_forum",
+
+
+    "queues": {
+        "1vs1": {
+            "players_per_match": 2
+        },
+        "2vs2": {
+            "players_per_match": 4
+        },
+        "5vs5": {
+            "players_per_match": 10
+        },
+        "sandbox": {
+            "players_per_match": 1
+        }
+    }
+
+    
+}

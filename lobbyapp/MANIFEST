@@ -1,0 +1,32 @@
+
+
+    Graph of component interlinking inside Lobbyapp
+
+
+                                    via API helper
+    DatabaseManager---------------------------------------------------------\
+        |                                                                   |
+    via |                                                                   |   
+    API |                                                                   |
+ helper |              .selectlayer.api.*                                   |
+        |    /------------------------------------------\                   |
+    SelectLayer       two Queue.Queue objects          EventProcessor       |  
+       |     \------+-----------------------------------^   |               | 
+       |            |  .selectlayer.api.*                   | transacts     | 
+       |            |                                       |               | 
+       |            ^                                       |               | 
+       |            |                                       |           /---/       
+       |            |    .eventmanager.api.*                V           |   manages alphas
+       |            \---------<-------+-------------PlayerDB+Transactions<----------------->AlphaCounter
+       |                                             ^  |               ^ invokes TRStartMatch 
+       |                                             |  |               |     
+       |                                             |  |               |     
+       |                                             |  |               |     
+       |     StatisticsNotary------------------------/  |               |invokes     
+       |       |                                        V               |TRMatchFound
+       |       |                                QueueManager            |      
+       |       |                                        |               |
+       |       |                                        | asks          |
+       |       |                                        |               |
+       |       |                                        \-------OpportunisticMatchMaker
+    THE UNCHARTED ISLANDS OF THE INTERNET
