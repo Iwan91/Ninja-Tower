@@ -20,9 +20,9 @@ Due to multi-tier hierarchy of server - shards can be spawned on different machi
 
 ## The Client Part
 
-**patcher_launcher** have two folder in it. They are written in C#.
-    -Patcher is a program which automaticaly download updates from server.
-    -Launcher is a program which allow you log in game and choose queue. It run directly **main_exe**.
+**patcher_launcher** have two folder in it. They are written in C#.<br>
+    -Patcher is a program which automaticaly download updates from server.<br>
+    -Launcher is a program which allow you log in game and choose queue. It run directly **main_exe**.<br>
 
 **main_exe** is a main battle engine written in C++ with allegro5.
 
@@ -40,8 +40,8 @@ Due to multi-tier hierarchy of server - shards can be spawned on different machi
 
 **unused_images** is a folder that contains images which was unused in game.
 
-**gameplay_movies** is folder that contain movies from game. You can watch 2 of 3 on youtube.
-    -http://www.youtube.com/watch?v=FROgdSAQUwc first gameplay without sound and poor GUI in game.
+**gameplay_movies** is folder that contain movies from game. You can watch 2 of 3 on youtube.<br>
+    -http://www.youtube.com/watch?v=FROgdSAQUwc first gameplay without sound and poor GUI in game.<br>
     -http://www.youtube.com/watch?v=yj6sJk268m0 second gameplay with sound and nice GUI in game.
 
 # I've seen enough source. Give me the docs.
