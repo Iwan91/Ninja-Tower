@@ -18,6 +18,32 @@ Due to multi-tier hierarchy of server - shards can be spawned on different machi
 
 **Lobbyapp** is the thing launcher connects to. You can find someone to play here, pick your character, and then entire server-allocation and game-managing process will be fired by lobbyapp. It is written in a nice transaction-fashioned way, has some unittests, and requires [Satella](https://github.com/henrietta/satella). It talks (networkily) with clients in an elegant SSL+JSON language.
 
+## The Client Part
+
+**patcher_launcher** have two folder in it. They are written in C#.
+    *Patcher is a program which automaticaly download updates from server.
+    *Launcher is a program which allow you log in game and choose queue. It run directly **main_exe**.
+
+**main_exe** is a main battle engine written in C++ with allegro5.
+
+## Game editors
+
+**Map_cutter** is a program which allow big map to be cut on smaller pieces. Piece have size 512x512.
+
+**Heroes_editor_v1** is a program which allows you edit heroes but is deprecated. **Game_editor_v2** is his successor.
+
+**Map_editor_v1** is a program which allows you edit maps but is deprecated. **Game_editor_v2** is his successor.
+
+**Game_editor_v2** is a program which allows you edit maps, heroes and shots.
+
+## Other stuff
+
+**unused_images** is a folder that contains images which was unused in game.
+
+**gameplay_movies** is folder that contain movies from game. You can watch 2 of 3 on youtube.
+    *http://www.youtube.com/watch?v=FROgdSAQUwc first gameplay without sound and poor GUI in game.
+    *http://www.youtube.com/watch?v=yj6sJk268m0 second gameplay with sound and nice GUI in game.
+
 # I've seen enough source. Give me the docs.
 
 Sorry, they are only available in Polish. On the gripping side, it's in MediaWiki markup syntax, so safe for human consumption. Consult polish_documentation directory for that. What may interest you most are the protocol specifications - both "inter-shardmgr", launcher-lobbyapp and game client-sakura ones.
