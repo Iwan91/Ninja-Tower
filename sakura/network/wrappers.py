@@ -64,7 +64,7 @@ class LoggingInWrapper(object):
 
                 # Generate challenge and response, send it
                 self.challenge1 = 'alwaysthesun'
-                self.response1 = sha1(eval(self.player_profile['password']) + self.challenge1).hexdigest()
+                self.response1 = sha1(self.player_profile['password'] + self.challenge1).hexdigest()
                 self.send(self.challenge1)
                 self.state = STATE_AWAITING_RESPONSE_1
             elif self.state == STATE_AWAITING_RESPONSE_1:
@@ -74,7 +74,7 @@ class LoggingInWrapper(object):
                     return
 
                 challenge2 = 'somemoresun'
-                response2 = sha1(eval(self.player_profile['password']) + challenge2).hexdigest()
+                response2 = sha1(self.player_profile['password'] + challenge2).hexdigest()
 
                 self.send(config.registry['map_name'].encode('utf8') + '\xFF' + challenge2)
 
