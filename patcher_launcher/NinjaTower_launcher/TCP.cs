@@ -41,9 +41,9 @@ namespace NinjaTower_launcher
             try
             {
                 socket = new TcpClient();
-                socket.Connect("s1.in.henrietta.com.pl", 4001);
+                socket.Connect("ninjatower.eu", 4001);
                 sslStream = new SslStream(socket.GetStream(), false, new RemoteCertificateValidationCallback(CertificateValidationCallback));
-                sslStream.AuthenticateAsClient("s1.in.henrietta.com.pl");
+                sslStream.AuthenticateAsClient("ninjatower.eu");
             }
             catch
             {
