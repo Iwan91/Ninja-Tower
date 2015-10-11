@@ -27,9 +27,17 @@ namespace NinjaTower_patcher
 
         private void Form1_Shown(object sender, EventArgs e)
         {
+            int size=25;
+            Random rng = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            char[] buffer = new char[size];
+            for (int i = 0; i < size; i++){
+                buffer[i] = chars[rng.Next(chars.Length)];
+            }
+            string s = new string(buffer);
+            
             BringToFront();
-
-            webBrowser1.Navigate("http://www.ninjatower.eu/patcher/news.html");
+            webBrowser1.Navigate("http://www.ninjatower.eu/patcher/news.html?random="+s);
 
             webClient = new WebClient();
             //webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
@@ -210,7 +218,7 @@ namespace NinjaTower_patcher
                     Int64 temp_size = 0;
                     while (webClient.IsBusy == true)
                     {
-                        System.Threading.Thread.Sleep(1000);
+                        System.Threading.Thread.Sleep(25);
                         temp_size = Convert.ToInt64((double)diff[i].size * ((double)progressChunk / 100.0));
 
                         label2.Invoke(new Action(() =>

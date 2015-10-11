@@ -1,0 +1,14 @@
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\bin\Debug\NinjaTowerLauncher.exe.config
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\bin\Debug\NinjaTowerLauncher.exe
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\bin\Debug\NinjaTowerLauncher.pdb
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\bin\Debug\Newtonsoft.Json.dll
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\ResolveAssemblyReference.cache
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTower_launcher.Form1.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTower_launcher.Form2.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTower_launcher.Form3.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTower_launcher.Form4.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTower_launcher.Form5.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTower_launcher.Properties.Resources.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTowerLauncher.csproj.GenerateResource.Cache
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTowerLauncher.exe
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_launcher\obj\Debug\NinjaTowerLauncher.pdb

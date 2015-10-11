@@ -1,0 +1,9 @@
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\bin\Release\Ninja Tower Patcher.exe.config
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\bin\Release\Ninja Tower Patcher.exe
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\bin\Release\Ninja Tower Patcher.pdb
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\obj\Release\ResolveAssemblyReference.cache
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\obj\Release\NinjaTower_patcher.Form1.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\obj\Release\NinjaTower_patcher.Properties.Resources.resources
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\obj\Release\Ninja Tower Patcher.csproj.GenerateResource.Cache
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\obj\Release\Ninja Tower Patcher.exe
+d:\GitHub\Ninja-Tower\patcher_launcher\NinjaTower_patcher\obj\Release\Ninja Tower Patcher.pdb

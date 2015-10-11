@@ -88,6 +88,7 @@ bool communication::ConnectTCP_UDP()
 	UDP_addr.sin_addr.s_addr=inet_addr(ip.c_str());
 	connect(UDP_socket, (SOCKADDR*)&UDP_addr, sizeof(UDP_addr));
 	UDPNonBlocking(1);
+
 	return 1;
 }
 
@@ -113,7 +114,6 @@ string communication::ToLowerCase(string text)
 }
 bool communication::SecureTCP()
 {
-	
 	SendTCP(login);
 	string w=ReceiveTCP();
 	
