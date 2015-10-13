@@ -5,6 +5,15 @@ from sakura.physics.base import Shot
 from sakura.scripting import mathops
 from sakura.buffs.base import Buff
 
+class Slow(Buff):
+    def __init__(self):
+        Buff.__init__(self, 1, 4)   # 4 seconds slow
+        self.speed = 0.7
+    def apply(self, *args, **kwargs):
+        # it doesn't stack
+        Buff.apply(self, *args, **kwargs)
+        self.stacks = 1
+
 class Shuriken(MetaShotSupportingClass):
     shot_type = 2
     def __init__(self, damage, team):
