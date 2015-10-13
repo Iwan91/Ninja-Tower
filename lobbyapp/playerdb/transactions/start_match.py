@@ -76,7 +76,7 @@ class TRStartMatch(PlayerDatabaseTransaction):
             team_no = 0 if pid in self.alpha.team1 else 1
             pd = {
                 'login': self.pdb.ensure(pid).login,
-                'password': repr(self.pdb.pdbhelper.get_password_for_pid(pid)),
+                'password': self.pdb.pdbhelper.get_password_for_pid(pid),
                 'character': self.alpha.whom_picked_pid(pid),
                 'team': team_no
             }
