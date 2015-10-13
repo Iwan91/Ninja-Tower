@@ -51,6 +51,9 @@ class StatusDelegate(MetaActorSupportingClass):
             self.cooldowns[keyid] = self.hero_archetype['skilltab'][keyid][0]
             self.skills[keyid] = self.hero_archetype['skilltab'][keyid][1](self)
 
+    def on_stunned(self):
+        pass # so far, nothing particular should happen here
+
     def recalculate_buffs(self):
         """called by GameWorldProcessor if it detects that we need to refresh our buffs"""
         print 'recalculating buffs'
