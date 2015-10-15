@@ -1,3 +1,5 @@
+ZOMG!!#@# Now playable on http://ninjatower.eu !
+
 # By the Gods, what is this?
 
 Ninja Tower is a crossover of a 2D MOBA/ARTS/DOTA with smash'em game. It was to feature advanced teamplay along with pure smashing fun. It would have certainly met that goal if not lack of sufficiently available pixel artists. We could provide only a single character - too little for any advanced tactics to be. Therefore - thinking up a new game that would not require as much pixeling around, and be certainly more fun - we decided to scrap Ninja Tower and make it available under a BSD 3-clause license, for other people to study the innards of a - working, as you might see on movies - fast-paced network game.
